@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <title>Board</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; }
+        body {
+            background-image: url('https://blog.kakaocdn.net/dn/cmseu8/btq6Z9KJYXo/aDlzENDratLaBwK2MYrPF1/img.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        header {
+            text-align: center;
+            font-family: Dongle;
+            font-size: xx-large;
+        }
+        .root { color: antiquewhite; }
+        main {
+            text-align: center;
+            font-family: Dongle;
+            font-size: xx-large;
+            color: antiquewhite;
+        }
+        .home {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        .back {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: Dongle;
+            font-size: xx-large;
+            width: 100px;
+            height: 50px;
+            border-radius: 20px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="home">
+            <a href="/"><img src="/home-btn.png" style="width: 50px; height: 50px;"></a>
+        </div>
+        <div class="root">
+            <h1 style="color:black">제목 : <%= post.title %></h1>
+        </div>
+    </header>
+    <main>
+        <p><%= post.writing %></p>
+          <br><br>
+          <div class="content">
+          <a href="/board/<%= post.id %>/edit">
+            <button style="width: 200px; height:50px;border-radius:10px; background-color: rgb(0, 255, 242); color:white; font-family: Dongle; font-size: xx-large;">수정</button>
+          </a>
+          <a href="/board/<%= post.id %>/delete">
+            <button style="width: 200px; height:50px;border-radius:10px; background-color: red; color:white; font-family: Dongle; font-size: xx-large;">삭제</button>
+          </a>
+        </div>
+        <a href="/board"><button class="back">목록으로</button></a>
+    </main>
+    
+</body>
+</html>

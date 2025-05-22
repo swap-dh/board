@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+
+        .txt {
+            font-family: Dongle;
+            text-align: center;
+            font-size: xx-large;
+            color:white
+        }
+        .board {
+            font-family: Dongle;
+            font-size: xx-large;
+            text-align: center;
+            width : 900px;
+            height: 1000px;
+            border: 10px solid black;
+            margin: 0 auto;
+            border-radius: 100px;
+            background-color: bisque;
+            
+        }
+
+        textarea {
+            font-family: Dongle;
+            width: 500px;
+            height: 500px;
+            font-size:xx-large;
+            border-radius: 15px;
+        }
+        input {
+            border-radius: 10px;
+            width: 200px;
+            height: 40px;
+            font-size:x-large;
+            text-align: center;
+            color:black
+        }
+        ::placeholder {
+            color:black;
+        }
+
+        input[type="checkbox"] {
+            vertical-align: middle;
+            border: none;
+
+        }
+
+      body {
+        background-image: url('https://blog.kakaocdn.net/dn/cmseu8/btq6Z9KJYXo/aDlzENDratLaBwK2MYrPF1/img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+      header {
+        height: 100px;
+      }
+
+      button {
+        font-family: Dongle;
+        font-size: xx-large;
+        width: 200px;
+        height: 100px;
+        border-radius: 30px;
+        background-color: powderblue;
+        border:none;
+      }
+      .home {
+        position: absolute;
+        top : 10px;
+        left: 10px;
+      }
+    </style>
+    <title>board</title>
+</head>
+<body>
+    <header>
+        <div class="home">
+            <a href='/'><img src="/home-btn.png" style="width: 50px; height: 50px;"></a>
+        </div>
+        <div class="txt">
+            <h1>게시판 글 작성하기</h1>
+        </div>
+    </header>
+    <main>
+        <br><br>
+        <form action="/board_write" method="post">
+        <div class="board">
+            <h1 style="color:black">멋진 글을 작성해주세요!</h1>
+            <br>
+            <label for="author">제목 : </label>
+            <input id="author" name="title" type="text" placeholder="swap">
+            <br>
+            <label for="check"> 비밀번호 설정 : </label>
+            <input type="checkbox" id="check" name="check">
+            <br>
+            <div id="password" style="display: none;">
+            <label for="password">비밀번호 : </label>
+            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" style="font-size: large;">
+            </div>
+            <h3>멋있는 글을 작성해주세요!!</h3>
+            <textarea id="write" name="write"></textarea>
+            <div style="text-align: center;">
+                <button type="submit" style="text-align: center;">제출</button>
+            </div>
+        </div>
+        </form>
+    </main>
+   <script>
+        document.getElementById('check').addEventListener('change', function() {
+        const passwordBox = document.getElementById('password');
+        passwordBox.style.display = this.checked ? 'block' : 'none';
+    });
+</script>
+</body>
+</html>

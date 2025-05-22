@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; padding: 0; }
+
+      body {
+        background-image: url('https://blog.kakaocdn.net/dn/cmseu8/btq6Z9KJYXo/aDlzENDratLaBwK2MYrPF1/img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Dongle', sans-serif;
+      }
+
+      a { text-decoration: none; color: rgb(0, 0, 0); }
+
+      .auth {
+        gap: 80px;
+        position: absolute;
+        top: 20px;
+        right: 0;
+        display: flex;
+      }
+
+      button {
+        width: 150px;
+        height: 50px;
+        border-radius: 20px;
+        font-family: Dongle;
+        font-size: xx-large;
+        text-align: center;
+      }
+
+      .introduce {
+        text-align: center;
+        font-size: xx-large;
+      }
+
+      .rule {
+        text-align: center;
+        font-size: xx-large;
+        color: white;
+      }
+
+      .board {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="board" style="width: 100px; height: 50px;">
+      <a href="/board"><button>게시판으로</button></a>
+    </div>
+
+    <div class="auth">
+      <% if (!session || !session.user) { %>
+        <div class="login">
+          <a href="/login"><button>로그인</button></a>
+        </div>
+        <div class="register">
+          <a href="/register"><button>회원가입</button></a>
+        </div>
+      <% } else { %>
+        <div class="logout">
+          <a href="/logout"><button>로그아웃</button></a>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="introduce">
+      <h1>안녕하세요 swap 게시판에 오신 여러분들 환영합니다</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="rule">
+      <br><br>
+      <h1 style="color:yellow">게시판을 사용할때 아래의 규칙을 따라 주세요</h1>
+      <ul>
+        <pre>
+          <li>1.회원가입을 하고 로그인을 해주세요 (로그인을 하지 않으면 게시판에 접근할 수 없습니다 🚨)</li>
+          <li>2.비밀글을 만들고 싶을때 꼭 어려운 비밀번호로 작성해주세요 🔑</li>
+          <li>3.매우매우 독특한 글을 써주세요 🧐</li>
+        </pre>
+      </ul>
+      <div style="text-align: center;">
+        <img src="https://mblogthumb-phinf.pstatic.net/20160120_175/sereillute_14532878085643vpOk_JPEG/5.jpg?type=w420">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <h1 style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);">@made by swap</h1>
+  </footer>
+</body>
+</html>
