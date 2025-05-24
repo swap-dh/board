@@ -2,6 +2,16 @@ const session = require('express-session');
 let express = require('express');
 let app = express();
 let mysql = require('mysql2');
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100, 
+  message: "<script>alert('요청이 너무 많습니다. 나중에 다시 시도해주세요'); history.back();</script>"
+});
+
+app.use(limiter);
+
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/templates');
@@ -36,8 +46,46 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('static'));
 
-app.get('/', (req, res) => {
+app.get('/',(req, res) => {
     res.render('index', { session: req.session });
+});
+
+
+app.get('/mypage/delete', ifLogin, (req, res) => {
+    db.execute("DELETE FROM users WHERE id = ?", [req.session.user.id], (err, results) => {
+        if (err) {
+            console.log("처리 에러:", err);
+            return res.send("에러 발생");
+        }
+        res.send("<script>alert('회원탈퇴가 완료되었습니다'); location.href='/';</script>");
+    });
+});
+
+app.get('/mypage/edit', ifLogin, (req, res) => {
+    res.sendFile(__dirname + "/templates/mypage_edit.html");
+});
+app.post('/mypage/edit', ifLogin, (req, res) => {
+    const { name, email, password } = req.body;
+    db.execute("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?", [name, email, password, req.session.user.id], (err, results) => {
+        if (err) {
+            console.log("수정 에러:", err);
+            return res.send("에러 발생");
+        }
+        console.log("수정 결과:", results);
+        res.send("<script>alert('회원정보 수정이 완료되었습니다'); location.href='/';</script>");
+    });
+}
+);
+
+app.get('/mypage',ifLogin ,(req, res) => {
+    db.execute("SELECT * FROM users WHERE id = ?", [req.session.user.id], (err, results) => {
+        if (err) {
+            console.log("마이페이지 에러:", err);
+            return res.send("에러 발생");
+        }
+        console.log("마이페이지 결과:", results[0]);
+        res.render('mypage', { user: results[0]});
+    });
 });
 
 app.get('/board', ifLogin,(req, res)=> {
@@ -217,3 +265,4 @@ app.post("/register", (req, res)=> {
 app.listen(3000, () => {
     console.log("Runned 3000");
 });
+
